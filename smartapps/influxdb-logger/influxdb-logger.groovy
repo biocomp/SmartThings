@@ -47,7 +47,7 @@ preferences {
         	name: "configLoggingLevelIDE",
         	title: "IDE Live Logging Level:\nMessages with this level and higher will be logged to the IDE.",
         	type: "enum",
-        	options: [
+            options: [
         	    "0" : "None",
         	    "1" : "Error",
         	    "2" : "Warning",
@@ -56,7 +56,7 @@ preferences {
         	    "5" : "Trace"
         	],
         	defaultValue: "3",
-            displayDuringSetup: true,
+            // displayDuringSetup: true, Not supported in App
         	required: false
         )
     }
@@ -599,7 +599,7 @@ def postToInfluxDB(data) {
     logger("postToInfluxDB(): Posting data to InfluxDB: Host: ${state.databaseHost}, Port: ${state.databasePort}, Database: ${state.databaseName}, Data: [${data}]","debug")
     
     try {
-        def hubAction = new physicalgraph.device.HubAction(
+        def hubAction = new hubitat.device.HubAction(
         	[
                 method: "POST",
                 path: state.path,
@@ -636,7 +636,7 @@ def postToInfluxDB(data) {
  *
  *  Handles response from post made in postToInfluxDB().
  **/
-def handleInfluxResponse(physicalgraph.device.HubResponse hubResponse) {
+def handleInfluxResponse(hubitat.device.HubResponse hubResponse) {
     if(hubResponse.status >= 400) {
 		logger("postToInfluxDB(): Something went wrong! Response from InfluxDB: Headers: ${hubResponse.headers}, Body: ${hubResponse.body}","error")
     }

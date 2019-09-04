@@ -1,4 +1,4 @@
-# SmartThings
+# SmartThings (port for Hubitat)
 https://github.com/codersaur/SmartThings
 
 Copyright (c) 2017 [David Lomas](https://github.com/codersaur)
